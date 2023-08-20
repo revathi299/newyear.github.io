@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <title>New Year Countdown</title>
+
+        <!-- Bootstrap CDN Css -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+        <!-- Bootstrap CDN Js -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="./style.css">
+
+    </head>
+    <body>
+
+        <div class="container w-50 box">
+
+            <!-- Upper Box -->
+            <div class="up_box">
+                CountDown to 2024
+                <h2>New Year</h2>
+            </div>
+
+            <!-- Lower Box -->
+            <div class="lower_box text-center">
+                
+                <!-- Countdown -->
+                <div class="row">
+                    <div id="days" class="col counter"></div>
+                    <div id="hours" class="col counter"></div>
+                    <div id="minutes" class="col counter"></div>
+                    <div id="seconds" class="col counter"></div>
+                </div>
+
+                <!-- Title -->
+                <div class="row">
+                    <div class="col title">
+                        Days
+                    </div>
+                    <div class="col title">
+                        Hours
+                    </div>
+                    <div class="col title">
+                        Minutes
+                    </div>
+                    <div class="col title">
+                        Seconds
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Countdown Script -->
+        <script>
+
+            // Set the date that we are counting down to
+            var countDate = new Date("Jan 1, 2024 01:00:00").getTime();
+
+            // Function to update the value after every second
+            var x = setInterval(function() {
+                
+                // Today's Date
+                var now = new Date().getTime();
+
+                // Find the difference between now and the expected deadline's Date
+                var distance = countDate - now;
+
+                /*
+                    1000 ms     -> 1 sec
+                    60 sec      -> 1 min
+                    60 min      -> 1 hr
+                    24 hr       -> 1 day
+                */
+
+                var day = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hour = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                //console.log(seconds);
+
+                document.getElementById("days").innerHTML = day;
+                document.getElementById("hours").innerHTML = hour;
+                document.getElementById("minutes").innerHTML = minutes;
+                document.getElementById("seconds").innerHTML = seconds;
+
+                // if the countdown is over
+                if(distance < 0) {
+                    clearInterval(x);
+                    document.write = "Expired";
+                }
+
+            }, 1000);
+        </script>
+        
+    </body>
+</html>
